@@ -1,0 +1,4 @@
+﻿namespace FSNT
+
+open System
+
