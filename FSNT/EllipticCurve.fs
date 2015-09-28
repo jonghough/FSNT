@@ -1,8 +1,11 @@
 ﻿namespace FSNT
 
-open System
 
 module EllipticCurve =
+
+    open System
+    open Sigma
+
     type Point(x, y,isInf : bool) =
         member public this.x : int32 = x
         member public this.y : int32 = y

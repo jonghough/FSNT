@@ -1,52 +1,71 @@
 ﻿namespace FSNT
 
 open System
+open System.Collections
+open System.Collections.Generic
 
 module PrimeSieve = 
 
 //type SList<'T when 'T : uint32 || 'T : uint64> =
 
+//    let toSeq (d : Dictionary<uint32,bool> ) =
+//        for v in d.Values do
+//
+    let toMap dictionary = 
+        (dictionary :> seq<_>)
+        |> Seq.map (|KeyValue|)
+        |> Map.ofSeq
 
-    let AtkinSieve n : uint32 =
-        let sqrt = uint32(Math.Sqrt(n) ) + 1u
+    let Test v =
+        v = false
+
+    let AtkinSieve (n : uint32) =
+        let sqrt = uint32(Math.Sqrt(float(n)) ) + 1u
         //let mutable items : List<uint32> = [0 .. ]
-        let mutable primes = [0 .. int(sqrt)]
+        let mutable primes =System.Collections.BitArray(int(n+1u),false)//new Dictionary<uint32,bool>()//[0 .. int(sqrt)]
 
+        Console.WriteLine("srt is "+string(sqrt));
         let mutable i = 0u
-        let mutable j = 0u
-
         while i < sqrt do
+            Console.WriteLine("i is "+string(i));
+            let mutable j = 0u
             while j < sqrt do
-                let k = 4u * i * i + j * j
+                Console.WriteLine("j is "+string(j));
+                let k = (4u * i * i) + (j * j)
                 if k < n && (k % 12u = 1u || k % 12u = 5u) then
-                    primes.[k] <-    
-                        if primes[k] = () then true
-                        else !primes[k]
-                let k2 = 3u * i * i + j * j
+
+                    Console.WriteLine("k is "+string(k));
+                    primes.Set(int(k), Test(primes.Get(int(k))))
+
+                let k2 = (3u * i * i) + (j * j)
                 if k2 < n && k2 % 12u = 7u then
-                    primes.[k2] <-    
-                        if primes[k2] = () then true
-                        else !primes[k2]
-                let k3 = 3u * i * i - j * j
-                if k3 < n &&  k3 % 12u = 11u then
-                    primes.[k3] <-    
-                        if primes[k3] = () then true
-                        else !primes[k3]
+                    Console.WriteLine("k2 is "+string(k2));
+                    primes.Set(int(k2), Test(primes.Get(int(k2))))
+                let k3 = (3u * i * i) - (j * j)
+                if k3 < n && i > j && k3 % 12u = 11u then
+                    Console.WriteLine("k3 is "+string(k3));
+                    primes.Set(int(k3), primes.Get(int(k3)) = false)
                 j <- j + 1u
             i <- i + 1u
+        
+        let pr = new List<uint32>()
+    
+        i <- 0u
 
-        primes |> Seq.filter(
-            fun x -> 
-                    let mutable D = 0u
-                    let mutable E = uint64(D)
-                    if primes.[x] then
-                        E <- uint64(D)
-                        let F = uint64(x)
-                        while x * x + D * x < n do
-                            primes.[x * x + x * D] <- false
-                            D <- D + 1u
-                    primes.[x]
-        )
+        while i < sqrt do
 
-    let update lst =
-        retLst = 
+            let index = int(i)
+            i <- i+1u
+            if primes.Get(index) = true then
+                Console.WriteLine("index is "+string(index));
+                let mutable D = 0u in
+                let F = uint64(index) in
+                while F * F + uint64(D) * F < uint64(n) do
+                    primes.Set(int(F * F + uint64(D) * F),false)
+                    D <- D+1u
+                pr.Add(uint32(index))
+
+        pr
+ 
+
+

@@ -1,8 +1,9 @@
 ﻿namespace FSNT
 
-open System
 
 module Sigma = 
+    open System
+    open Pollard
 
     let Totient (N : UInt64) =
         let flist = Pollard.Factor N
@@ -19,4 +20,3 @@ module Sigma =
         for kvp in dict do
             res <- res * uint64( Math.Pow(float(kvp.Key), float(kvp.Value)) - Math.Pow(float(kvp.Key), float(kvp.Value-1)))
         res
-

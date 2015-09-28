@@ -61,7 +61,7 @@ module Pollard =
     ///
     ///
     ///
-    let rec Factor (n : UInt64) : List<UInt64> =
+    let rec Factor (n : UInt64)  =
         match n with
             | 1UL -> [1UL]
             | _ -> let d = Rho n
