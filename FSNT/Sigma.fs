@@ -3,10 +3,10 @@
 
 module Sigma = 
     open System
-    open Pollard
+    open FSNT.Pollard
 
     let Totient (N : UInt64) =
-        let flist = Pollard.Factor N
+        let flist = FSNT.Pollard.Factor N
         let dict = System.Collections.Generic.Dictionary<UInt64,int>()
         let mutable res = 1UL
         for n in flist do

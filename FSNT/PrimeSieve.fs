@@ -7,7 +7,7 @@ open System.Collections.Generic
 module PrimeSieve = 
 
     ///<summary>
-    /// Returns a list of the prime sless than n.
+    /// Returns a list of the primes less than n.
     ///</summary>
     let AtkinSieve (n : uint32) =
         let sqrt = uint32(Math.Sqrt(float(n)) ) + 1u

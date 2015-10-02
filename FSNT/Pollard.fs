@@ -1,12 +1,12 @@
 ﻿namespace FSNT
 
-open System
-open System.Numerics
 
 ///
 ///
 ///
 module Pollard =
+    open System
+    open System.Numerics
     ///
     let rec GCD(a : UInt64, b : UInt64) : UInt64 =
             match b with
