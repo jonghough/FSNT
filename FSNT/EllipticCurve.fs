@@ -90,7 +90,7 @@ module EllipticCurve =
             let others = Seq.map(fun n  -> this.add(n, n)) fin
             let pai = Infinite //point at infinity
             let elements = Seq.concat [fin ; others]
-            elements |> Seq.iter(fun n -> this.showPoint(n)) 
+           // elements |> Seq.iter(fun n -> this.showPoint(n)) 
             elements|> Seq.append ([pai]) |> Seq.distinctBy (fun n -> 
                                         match n with
                                         | Infinite -> 1
